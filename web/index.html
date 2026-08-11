@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tạo video tự động</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/app.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2' stroke-linecap='round'%3E%3Crect x='2' y='3' width='20' height='18' rx='2'/%3E%3Cpath d='M7 3v18M17 3v18M2 9h5M2 15h5M17 9h5M17 15h5'/%3E%3C/svg%3E">
+</head>
+<body>
+
+<!-- Bộ icon dùng lại: Lucide, stroke 1.5, viewBox 24 -->
+<svg class="sr-only" aria-hidden="true">
+  <defs>
+    <g id="i-film"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M7 3v18M17 3v18M2 9h5M2 15h5M17 9h5M17 15h5"/></g>
+    <g id="i-library"><path d="M3 3v18h18"/><rect x="7" y="8" width="3" height="9" rx="1"/><rect x="13" y="4" width="3" height="13" rx="1"/></g>
+    <g id="i-wand"><path d="m3 21 9-9M12.5 6.5 15 4l5 5-2.5 2.5zM9 3v4M7 5h4M18 15v4M16 17h4"/></g>
+    <g id="i-play"><path d="m6 3 14 9-14 9z"/></g>
+    <g id="i-upload"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M12 3v13M7 8l5-5 5 5"/></g>
+    <g id="i-pencil"><path d="M17 3a2.8 2.8 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></g>
+    <g id="i-refresh"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></g>
+    <g id="i-trash"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v6M14 11v6"/></g>
+    <g id="i-plus"><path d="M12 5v14M5 12h14"/></g>
+    <g id="i-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M12 16V3M7 11l5 5 5-5"/></g>
+    <g id="i-x"><path d="M18 6 6 18M6 6l12 12"/></g>
+    <g id="i-check"><path d="m20 6-11 11-5-5"/></g>
+    <g id="i-alert"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></g>
+    <g id="i-loader"><path d="M12 2v4M12 18v4M4.9 4.9l2.9 2.9M16.2 16.2l2.9 2.9M2 12h4M18 12h4M4.9 19.1l2.9-2.9M16.2 7.8l2.9-2.9"/></g>
+    <g id="i-image"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></g>
+    <g id="i-repeat"><path d="m17 2 4 4-4 4M3 11V9a4 4 0 0 1 4-4h14M7 22l-4-4 4-4M21 13v2a4 4 0 0 1-4 4H3"/></g>
+    <g id="i-tag"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2c0 .5.2 1 .6 1.4l8.8 8.8a2 2 0 0 0 2.8 0l7.2-7.2a2 2 0 0 0 0-2.8z"/><circle cx="6.5" cy="6.5" r="1.2"/></g>
+    <g id="i-expand"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></g>
+    <g id="i-layers"><path d="m12 2 9 5-9 5-9-5zM3 12l9 5 9-5M3 17l9 5 9-5"/></g>
+  </defs>
+</svg>
+
+<header>
+  <span class="brand">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-film"/></svg>
+    <span>Tạo video tự động</span>
+  </span>
+  <nav aria-label="Khu vực làm việc">
+    <button data-page="sources" aria-current="page">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-library"/></svg>
+      Kho clip
+    </button>
+    <button data-page="create">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-wand"/></svg>
+      Tạo video
+    </button>
+    <button data-page="output">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-play"/></svg>
+      Video đã xong
+    </button>
+  </nav>
+  <span class="spacer"></span>
+  <span class="brandpick">
+    <label for="brandSelect" style="margin:0;color:inherit;font-weight:400">Thương hiệu</label>
+    <select id="brandSelect"></select>
+    <button class="btn ghost sm" id="btnBrandNew" title="Thêm thương hiệu">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><use href="#i-plus"/></svg>
+    </button>
+    <button class="btn ghost sm" id="btnBrandEdit" title="Sửa thương hiệu">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-pencil"/></svg>
+    </button>
+  </span>
+</header>
+
+<main>
+  <!-- ── KHO CLIP ─────────────────────────────────────────────── -->
+  <section id="page-sources" class="page active" aria-labelledby="h-sources">
+    <div class="card">
+      <h2 id="h-sources">Thêm clip vào kho</h2>
+      <p class="card-hint" id="brandContext"></p>
+      <div class="row">
+        <div>
+          <label for="fileInput">Chọn clip từ máy</label>
+          <input type="file" id="fileInput" multiple accept="video/mp4,video/quicktime,video/webm">
+          <p class="field-hint">Chọn được nhiều file. AI sẽ tự xem và mô tả từng clip sau khi tải xong.</p>
+        </div>
+        <div class="fixed">
+          <button class="btn" id="btnUpload">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-upload"/></svg>
+            Tải lên và phân tích
+          </button>
+        </div>
+      </div>
+      <div class="prog" id="upProg" hidden><i></i></div>
+      <div class="status" id="upStatus" role="status" aria-live="polite"></div>
+    </div>
+
+    <div class="card">
+      <h2>Kho clip <span class="count" id="srcCount"></span></h2>
+      <div id="srcGrid" class="grid"></div>
+      <div id="srcEmpty"></div>
+    </div>
+  </section>
+
+  <!-- ── TẠO VIDEO ────────────────────────────────────────────── -->
+  <section id="page-create" class="page" aria-labelledby="h-create">
+    <div class="card">
+      <h2 id="h-create">Chủ đề video</h2>
+      <p class="card-hint" id="createHint"></p>
+      <div class="row">
+        <div>
+          <label for="topic">Muốn nói về chuyện gì</label>
+          <input type="text" id="topic" placeholder="vd: quy trình làm một chiếc ghế gỗ">
+        </div>
+        <div class="fixed" style="min-width:150px">
+          <label for="seconds">Độ dài</label>
+          <select id="seconds">
+            <option value="30">Khoảng 30 giây</option>
+            <option value="45">Khoảng 45 giây</option>
+            <option value="60" selected>Khoảng 60 giây</option>
+            <option value="90">Khoảng 90 giây</option>
+          </select>
+        </div>
+        <div class="fixed" style="min-width:230px">
+          <label for="voice">Giọng đọc</label>
+          <select id="voice"></select>
+        </div>
+      </div>
+      <p class="field-hint" id="voiceHint"></p>
+      <div style="margin-top:16px">
+        <label for="extraPrompt">Dặn thêm cho AI</label>
+        <textarea id="extraPrompt" placeholder="vd: giọng mộc mạc, nhấn vào tay nghề, tránh nói về giá"></textarea>
+        <p class="field-hint">Không bắt buộc. Bỏ trống thì AI viết theo bối cảnh thương hiệu.</p>
+      </div>
+      <div style="margin-top:16px">
+        <button class="btn" id="btnGenerate">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-wand"/></svg>
+          Viết kịch bản và chọn clip
+        </button>
+      </div>
+      <div class="status" id="genStatus" role="status" aria-live="polite"></div>
+    </div>
+
+    <div id="genSkeleton" hidden>
+      <div class="card">
+        <h2>AI đang dựng kịch bản</h2>
+        <div class="skel-seg"><div><div class="skel skel-line" style="width:30%"></div><div class="skel" style="height:64px"></div></div><div><div class="skel" style="aspect-ratio:16/9"></div></div></div>
+        <div class="skel-seg"><div><div class="skel skel-line" style="width:26%"></div><div class="skel" style="height:64px"></div></div><div><div class="skel" style="aspect-ratio:16/9"></div></div></div>
+        <div class="skel-seg"><div><div class="skel skel-line" style="width:34%"></div><div class="skel" style="height:64px"></div></div><div><div class="skel" style="aspect-ratio:16/9"></div></div></div>
+      </div>
+    </div>
+
+    <div class="card" id="draftCard" hidden>
+      <h2>Duyệt trước khi render</h2>
+      <p class="card-hint">Sửa được lời đọc và đổi được clip. Bấm render khi thấy ổn.</p>
+      <div class="row" style="margin-bottom:20px">
+        <div>
+          <label for="draftTitle">Chữ lớn hiện đầu video</label>
+          <input type="text" id="draftTitle">
+        </div>
+        <div>
+          <label for="draftSub">Dòng nhỏ bên dưới</label>
+          <input type="text" id="draftSub">
+        </div>
+      </div>
+      <div id="segList"></div>
+      <div class="row" style="margin-top:20px">
+        <div class="fixed" style="min-width:160px">
+          <label for="transition">Chuyển cảnh</label>
+          <select id="transition">
+            <option value="fade">Mờ dần</option>
+            <option value="dissolve">Hòa tan</option>
+            <option value="slideleft">Trượt sang trái</option>
+            <option value="slideright">Trượt sang phải</option>
+            <option value="wipeleft">Gạt sang trái</option>
+            <option value="wiperight">Gạt sang phải</option>
+            <option value="circleopen">Mở vòng tròn</option>
+            <option value="circlecrop">Khép vòng tròn</option>
+          </select>
+        </div>
+        <div class="fixed" style="min-width:190px">
+          <label for="bgm">Nhạc nền</label>
+          <select id="bgm">
+            <option value="random">Ngẫu nhiên</option>
+            <option value="none">Không nhạc</option>
+          </select>
+        </div>
+        <div class="fixed" style="align-self:flex-end">
+          <button class="btn" id="btnRender">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-film"/></svg>
+            Render video
+          </button>
+        </div>
+        <div class="fixed" style="align-self:flex-end">
+          <button class="btn danger" id="btnCancelRender" hidden>Hủy render</button>
+        </div>
+      </div>
+      <div class="status" id="renderStatus" role="status" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ── OUTPUT ───────────────────────────────────────────────── -->
+  <section id="page-output" class="page" aria-labelledby="h-output">
+    <div class="card">
+      <h2 id="h-output">Video đã xong <span class="count" id="vidCount"></span></h2>
+      <div id="vidGrid" class="grid"></div>
+      <div id="vidEmpty"></div>
+    </div>
+  </section>
+</main>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<!-- ── Modal: thương hiệu ────────────────────────────────────── -->
+<dialog id="dlgBrand">
+  <form method="dialog">
+    <div class="head">
+      <h3 id="dlgBrandTitle">Thêm thương hiệu</h3>
+      <button class="btn ghost icon" value="cancel" aria-label="Đóng">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+    </div>
+    <div class="body">
+      <div>
+        <label for="brandName">Tên thương hiệu</label>
+        <input type="text" id="brandName" required>
+      </div>
+      <div>
+        <label for="brandCtx">Bối cảnh</label>
+        <textarea id="brandCtx" rows="5" placeholder="vd: Xưởng mộc làm bàn ghế gỗ thủ công theo yêu cầu, khách tới xưởng xem thợ làm việc."></textarea>
+        <p class="field-hint">AI đọc phần này để viết đúng về thương hiệu. Càng cụ thể, kịch bản càng ít bịa.</p>
+      </div>
+    </div>
+    <div class="foot">
+      <button class="btn danger" id="btnBrandDel" type="button" hidden>Xóa thương hiệu</button>
+      <button class="btn ghost" value="cancel">Hủy</button>
+      <button class="btn" id="btnBrandSave" type="button">Lưu</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- ── Modal: sửa clip ──────────────────────────────────────── -->
+<dialog id="dlgClip">
+  <form method="dialog">
+    <div class="head">
+      <h3>Sửa mô tả clip</h3>
+      <button class="btn ghost icon" value="cancel" aria-label="Đóng">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+    </div>
+    <div class="body">
+      <div class="with-preview">
+        <div>
+          <span class="well wide"><img id="clipThumb" alt=""></span>
+          <p class="field-hint" id="clipMeta"></p>
+        </div>
+        <div style="display:grid;gap:16px">
+          <div>
+            <label for="clipDesc">Mô tả</label>
+            <textarea id="clipDesc" rows="4"></textarea>
+            <p class="field-hint">AI dựa vào đây để chọn clip cho từng đoạn kịch bản.</p>
+          </div>
+          <div>
+            <label for="clipTags">Nhãn</label>
+            <input type="text" id="clipTags" placeholder="cách nhau bởi dấu phẩy">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="foot">
+      <button class="btn ghost" value="cancel">Hủy</button>
+      <button class="btn" id="btnClipSave" type="button">Lưu</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- ── Modal: chọn clip cho đoạn ────────────────────────────── -->
+<dialog id="dlgPicker" class="wide">
+  <form method="dialog">
+    <div class="head">
+      <h3 id="pickerTitle">Chọn clip</h3>
+      <button class="btn ghost icon" value="cancel" aria-label="Đóng">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+    </div>
+    <div class="body">
+      <div class="picker-tools">
+        <input type="text" id="pickerFilter" placeholder="Lọc theo mô tả hoặc nhãn">
+      </div>
+      <div class="picker-grid" id="pickerGrid"></div>
+    </div>
+    <div class="foot">
+      <button class="btn ghost" id="btnPickClear" type="button">Bỏ clip khỏi đoạn</button>
+      <button class="btn ghost" value="cancel">Đóng</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- ── Modal: xem video phóng to ────────────────────────────── -->
+<dialog id="dlgVideo" class="viewer">
+  <button class="close" id="btnCloseVideo" aria-label="Đóng">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><use href="#i-x"/></svg>
+  </button>
+  <video id="bigVideo" controls autoplay></video>
+  <div class="viewer-bar">
+    <span id="bigTitle"></span>
+    <a class="btn sm" id="bigDownload" download>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-download"/></svg>
+      Tải bản gốc
+    </a>
+  </div>
+</dialog>
+
+<!-- ── Modal: xác nhận ──────────────────────────────────────── -->
+<dialog id="dlgConfirm">
+  <form method="dialog">
+    <div class="head"><h3 id="cfTitle">Xác nhận</h3></div>
+    <div class="body"><p id="cfBody" style="margin:0"></p></div>
+    <div class="foot">
+      <button class="btn ghost" value="cancel">Hủy</button>
+      <button class="btn solid-danger" id="cfOk" type="button">Xóa</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

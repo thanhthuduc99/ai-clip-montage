@@ -1,0 +1,8 @@
+# Cài: pip install -r requirements.txt
+# Ngoài ra cần FFmpeg + ffprobe trên PATH (không cài qua pip được).
+
+edge-tts>=6.1.3       # giọng đọc free (Microsoft) — kèm word timestamps cho phụ đề
+Pillow>=10.0.0        # vẽ overlay hook + phụ đề
+requests>=2.31.0      # gọi OpenRouter
+python-dotenv>=1.0.1  # đọc .env
+filelock>=3.13.0      # voice_generator dùng khi chạy provider có khóa chung

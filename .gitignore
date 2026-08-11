@@ -1,0 +1,14 @@
+# Key thật, không bao giờ commit
+.env
+
+# Dữ liệu chạy máy: DB, clip đã upload, video đã render
+data/
+output/
+
+# Nhạc nền tự thả vào, mỗi người một bộ license riêng
+assets/music/*
+!assets/music/.gitkeep
+
+.venv/
+__pycache__/
+*.pyc
