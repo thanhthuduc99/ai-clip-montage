@@ -34,7 +34,7 @@ kịch bản. Đổi model trong `.env`.
 Windows:
 
 ```powershell
-git clone https://github.com/OWNER/ai-clip-montage.git
+git clone https://github.com/thanhthuduc99/ai-clip-montage.git
 cd ai-clip-montage
 copy .env.example .env    # mở ra điền OPENROUTER_KEY
 .\start.ps1
